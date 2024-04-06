@@ -1,0 +1,20 @@
+{
+  "name": "current",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "postcss ./src/css/tailwind.css -o ./public/build/style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "autoprefixer": "^10.4.19",
+    "tailwindcss": "^3.4.3"
+  },
+  "dependencies": {
+    "postcss-cli": "^11.0.0"
+  }
+}

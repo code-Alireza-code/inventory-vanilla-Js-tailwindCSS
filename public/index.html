@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>inventory with Js + tailwindcss</title>
+    <link rel="stylesheet" href="build/style.css" />
+  </head>
+  <body>
+    <div class="bg-slate-800 min-h-screen">
+      <!-- appbar -->
+      <div
+        class="flex justify-center gap-x-4 items-center h-12 bg-slate-700 mb-8"
+      >
+        <h1 class="text-slate-300 text-xl font-bold">Inventory App</h1>
+        <span
+          class="flex items-center justify-center w-7 h-7 rounded-full text-slate-300 bg-slate-500 border border-slate-300 font-bold"
+          id="products-number"
+        ></span>
+      </div>
+      <!-- app content -->
+      <div class="container max-w-screen-sm mx-auto">
+        <!-- category form -->
+        <section>
+          <div class="mb-6 hidden" id="category-wrapper">
+            <h2 class="text-xl text-slate-300 font-bold mb-2">
+              Add New Category
+            </h2>
+            <form
+              class="bg-slate-700 p-4 rounded-xl flex flex-col gap-y-4"
+              id="category-form"
+            >
+              <div class="">
+                <label class="block text-slate-400 mb-1" for="category-title"
+                  >title</label
+                >
+                <input
+                  type="text"
+                  name="category-title"
+                  id="category-title"
+                  class="bg-transparent rounded-xl border border-slate-500 text-slate-400"
+                />
+              </div>
+              <div class="">
+                <label
+                  class="block text-slate-400 mb-1"
+                  for="category-description"
+                  >description</label
+                >
+                <textarea
+                  type="text"
+                  name="category-description"
+                  id="category-description"
+                  class="bg-transparent rounded-xl border border-slate-500 text-slate-400 w-full resize-none"
+                ></textarea>
+              </div>
+              <div class="flex items-center justify-between gap-x-4">
+                <button
+                  id="cancel-add-category"
+                  class="flex-1 border border-slate-400 text-slate-300 rounded-xl py-2"
+                >
+                  Cancel
+                </button>
+                <button
+                  class="flex-1 bg-slate-500 text-slate-200 rounded-xl py-2"
+                >
+                  Add new Category
+                </button>
+              </div>
+            </form>
+          </div>
+          <button
+            id="toggle-add-category"
+            class="text-slate-600 text-lg mb-4 font-medium"
+          >
+            add New Category..?
+          </button>
+        </section>
+        <!-- product form -->
+        <div class="mb-6">
+          <h2 class="font-bold text-slate-300 text-xl mb-2">Add New Product</h2>
+          <form
+            class="w-full bg-slate-700 p-4 rounded-xl flex flex-col gap-y-4"
+            id="product-form"
+          >
+            <div class="">
+              <label class="block mb-1 text-slate-400" for="product-title"
+                >Product title</label
+              >
+              <input
+                type="text"
+                name="product-title"
+                id="product-title"
+                class="bg-transparent rounded-xl border border-slate-500 text-slate-400"
+              />
+            </div>
+            <div>
+              <label class="block text-slate-400 mb-1" for="product-quantity"
+                >Quantity</label
+              >
+              <input
+                type="number"
+                name="product-quantity"
+                id="product-quantity"
+                class="bg-transparent rounded-xl text-slate-400"
+              />
+            </div>
+            <div>
+              <label class="block text-slate-400 mb-1" for="product-category"
+                >Category</label
+              >
+              <select
+                class="w-full bg-transparent rounded-xl text-slate-400"
+                name="product-category"
+                id="product-category"
+              >
+                <!-- <option class="bg-slate-600 text-slate-300" value="">
+                  select a category
+                </option>
+                <option class="bg-slate-600 text-slate-300" value="frontend">
+                  frontend
+                </option>
+                <option class="bg-slate-600 text-slate-300" value="">
+                  backend
+                </option> -->
+              </select>
+            </div>
+            <button class="flex-1 bg-slate-500 text-slate-200 rounded-xl py-2">
+              Add New Product
+            </button>
+          </form>
+        </div>
+        <!-- product list -->
+        <h2 class="text-xl text-slate-300 font-bold mb-2">Product list</h2>
+        <!--search field  -->
+        <div class="flex items-center justify-between mb-3">
+          <label for="search-input" class="text-slate-500 text-lg"
+            >Search
+          </label>
+          <input
+            type="text"
+            name="search-input"
+            id="search-input"
+            class="bg-transparent rounded-xl border border-slate-500 text-slate-300"
+            placeholder="Search on Titles..."
+          />
+        </div>
+        <!-- sort field -->
+        <div class="flex items-center justify-between mb-6">
+          <label for="sort-products" class="text-slate-500 text-lg">Sort</label>
+          <select
+            name="sort-products"
+            id="sort-products"
+            class="bg-transparent text-slate-400 rounded-xl"
+          >
+            <option class="bg-slate-500 text-slate-300" value="">
+              select a category
+            </option>
+            <option class="bg-slate-500 text-slate-300" value="newest">
+              newest
+            </option>
+            <option class="bg-slate-500 text-slate-300" value="oldest">
+              oldest
+            </option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-y-2" id="products-list">
+          <!-- <div class="flex items-center justify-between">
+            <span class="text-slate-300">React.js</span>
+            <div class="flex items-center gap-x-3">
+              <span class="text-slate-400">date</span>
+              <span
+                class="block px-3 py-0.5 border border-slate-500 rounded-2xl text-slate-300 text-sm"
+                >front-end</span
+              >
+              <span
+                class="flex items-center justify-center w-7 h-7 rounded-full text-slate-300 bg-slate-500 border border-slate-300"
+                >1</span
+              >
+              <button
+                class="border px-2 py-0.5 rounded-2xl border-red-500 text-red-500"
+              >
+                delete
+              </button>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="../src/js/App.js" type="module"></script>
+</html>
